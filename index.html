@@ -1,20 +1,33 @@
-<div id="messages">
+<table id="messages">
 
-</div>
+</table>
 <form action="http://localhost:1234/new" method="post">
     <input type="text" name="content"/>
     <input type="submit"/>
 </form>
 <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
 <script>
-    //$('document').ready({
-        $.ajax({
-            url:'localhost:1234/',
-            type: 'get',
-            crossDomain: true,
-            success: function(data){
-            console.log(data);
-        }
+$(document).ready(function () {
+    $.getJSON('http://localhost:1234/', 
+        function (data) {
+        var rows = '';
+        $.each(data, function (key, value) {
+            rows += `
+            <tr>
+            <td> ${data[key].id} </td>
+            <td> ${data[key].content} </td>
+            </tr>
+            `;
+        });  
+        $('#messages').append(rows);
     });
-    //});
+});
 </script>
+<style>
+    td{
+        border: black 1px solid;
+    }
+    table{
+        border-collapse: collapse;
+    }
+</style>
