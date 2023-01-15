@@ -1,13 +1,11 @@
 <table id="messages">
 
 </table>
-<form action="http://localhost:1234/new" method="post">
-    <input type="text" name="content"/>
-    <input type="submit"/>
-</form>
+<input type="text" id="content"/>
+<input type="submit" onclick="save()"/>
 <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
 <script>
-$(document).ready(function () {
+function load(){
     $.getJSON('http://localhost:1234/', 
         function (data) {
         var rows = '';
@@ -18,10 +16,25 @@ $(document).ready(function () {
             <td> ${data[key].content} </td>
             </tr>
             `;
-        });  
-        $('#messages').append(rows);
+        });
+        $('#messages').html(rows);
     });
+}
+
+function save(){
+    $.ajax({
+        url: 'http://localhost:1234/new',
+        type: 'post',
+        data: "content=" + $('#content').val(),
+        success: function(){
+            load();
+        }
+    });
+}
+$(document).ready(function () {
+    load();
 });
+
 </script>
 <style>
     td{

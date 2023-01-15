@@ -6,7 +6,14 @@ import psycopg
 
 load_dotenv()
 
-conn = psycopg.connect("dbname={} user={} password={} host={}".format(os.getenv('DB_DATABASE'), os.getenv('DB_USERNAME'), os.getenv('DB_PASSWORD'), os.getenv('DB_HOST')))
+conn = psycopg.connect("dbname={} user={} password={} host={} port={}".format(
+    os.getenv('DB_DATABASE'),
+     os.getenv('DB_USERNAME'),
+      os.getenv('DB_PASSWORD'),
+       os.getenv('DB_HOST'),
+        os.getenv('DB_PORT')
+        )
+)
 cursor = conn.cursor()
 
 api = Flask(__name__)
@@ -19,16 +26,16 @@ def get_messages():
     cursor.execute('select * from messages')
     messages = []
     for m in cursor.fetchall():
-        messages += m
-        print(m)
+        messages.append({'id': m[0], 'content': m[1]})
     return jsonify(messages)
 
 @api.route('/new', methods=['POST'])
 @cross_origin()
 def post_message():
-    content = request.form.get('content')
-    cursor.execute('prepare myinsert as INSERT INTO messages (content) VALUES($1)')
-    cursor.execute("execute myinsert (%s)", content)
+    print(request.values)
+    content = request.values.get('content')
+    cursor.execute("INSERT INTO messages (content) VALUES(%s)", (content, ))
+    conn.commit()
     return redirect("/", code=302)
 
 if __name__ == '__main__':
