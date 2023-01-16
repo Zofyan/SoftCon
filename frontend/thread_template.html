@@ -1,0 +1,70 @@
+<!-- <h1> An awesome website where you can post messages to a server with your name, which get stored and then get retrieved so that you can see them right here! </h1> -->
+
+<h1 id="header_thread_name"></h1>
+
+<h3> Post a message on this thread! </h3>
+<input type="text" id="new_thread_msg"/>
+<input type="submit" onclick="new_thread_msg()"/>
+
+<h3> Messages: </h3>
+
+<table id="messages">
+</table>
+
+<script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+<script>
+
+thread_name = ""
+
+function get_thread_msgs(){
+    $.ajax({
+        url: 'http://localhost:1234/get_thread_msgs',
+        type: 'get',
+        data: { 
+            name: thread_name, 
+        },
+        success: function(response) {
+            console.log(response)
+            if(response[0].thread_msgs == null) {
+                return
+            }
+
+            var thread_msgs = '';
+
+            for (let i = 0; i < response[0].thread_msgs.length; i++) {
+                thread_msgs += response[0].thread_msgs[i] + "<br><br>";
+            }
+            $('#messages').html(thread_msgs);
+        },
+    });
+}
+
+function new_thread_msg(){
+    $.ajax({
+        url: 'http://localhost:1234/new_thread_msg',
+        type: 'post',
+        data: {"name" : thread_name, "msg" : $('#new_thread_msg').val()},
+        // data: {"name" : thread_name, "msg" : "msg from html!!!!@"},
+        success: function(){
+            get_thread_msgs();
+        }
+    });
+}
+
+$(document).ready(function () {
+    query = window.location.search;
+    url_params = new URLSearchParams(query);
+    thread_name = url_params.get('name')
+    $('#header_thread_name').html(thread_name);
+    get_thread_msgs();
+});
+
+</script>
+<style>
+    td{
+        border: black 1px solid;
+    }
+    table{
+        border-collapse: collapse;
+    }
+</style>
