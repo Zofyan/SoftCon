@@ -24,7 +24,6 @@ function get_thread_msgs(){
             name: thread_name, 
         },
         success: function(response) {
-            console.log(response)
             if(response[0].thread_msgs == null) {
                 return
             }
@@ -44,7 +43,6 @@ function new_thread_msg(){
         url: 'http://localhost:1234/new_thread_msg',
         type: 'post',
         data: {"name" : thread_name, "msg" : $('#new_thread_msg').val()},
-        // data: {"name" : thread_name, "msg" : "msg from html!!!!@"},
         success: function(){
             get_thread_msgs();
         }

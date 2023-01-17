@@ -1,6 +1,8 @@
 from flask import Flask, jsonify, request, redirect
 from flask_cors import CORS, cross_origin
 import os
+import string 
+import random
 from dotenv import load_dotenv
 import psycopg
 
@@ -53,22 +55,12 @@ def get_thread_msgs():
         print('get_thread_msgs, m[2] = ', m[2])
         thread_msgs.append({'thread_msgs' : m[2]})
 
-    # 1 / 10 times fetchall doesnt return anything in case of newly 
-    # created threads. Check if msgs are saved in the thread_msgs 
-    # column of these bugged threads 
-
-    # if len(thread_msgs) == 0:
-        # thread_msgs.append({'thread_msgs': None})
-
-    print(thread_msgs)
-
     return jsonify(thread_msgs)
 
 
 @api.route('/new_message', methods=['POST'])
 @cross_origin()
 def post_message():
-    print(request.values)
     content = request.values.get('content')
     cursor.execute("INSERT INTO messages (content) VALUES(%s)", (content, ))
     conn.commit()

@@ -50,8 +50,8 @@ function load_threads(){
         $.each(data, function (key, value) {
             threads += `
             <tr>
-            <td> <a href="thread_template.html?name=${data[key].name}"> 
-            ${data[key].name} </a>
+            <td> <a href="thread.html?name=${encodeURIComponent(data[key].name)}">
+            ${data[key].name}</a>
             </td>
             </tr>
             `;
@@ -78,6 +78,7 @@ function new_thread(){
         data: "name=" + $('#new_thread').val(),
         success: function(){
             load_threads();
+
         }
     });
 }
