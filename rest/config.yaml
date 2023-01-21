@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    run: rest
+  name: rest
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rest-api
+  template:
+    metadata:
+      labels:
+        app: rest-api
+    spec:
+      containers:
+      - image: rest-api:local
+        imagePullPolicy: Never
+        name: rest
+        ports:
+        - containerPort: 1234
+        resources: {}
+        env:
+        - name: POSTGRES_PASSWORD
+          value: "testing"
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+status: {}

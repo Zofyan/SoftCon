@@ -4,7 +4,7 @@ import os
 import string 
 import random
 from dotenv import load_dotenv
-import psycopg
+import psycopg2 as psycopg
 
 load_dotenv()
 
