@@ -4,9 +4,9 @@ metadata:
   name: frontendapp-lb      
 spec:
   selector:
-    app: frontendapp           # forum-api      
+    app: frontendapp           
   ports:
   - port: 8090
-    targetPort: 80               # 5000
+    targetPort: 80               
     nodePort: 31000
   type: LoadBalancer
