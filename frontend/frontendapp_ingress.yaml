@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: frontendapp-ingress        
+spec:
+  rules:
+    - host: best-forum.com             
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: frontendapp-lb                  
+                port:
+                  number: 8090
