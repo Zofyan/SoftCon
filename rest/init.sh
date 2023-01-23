@@ -1,5 +1,5 @@
-sudo docker build . -t rest-api
-sudo docker save rest-api > rest-api.tar
+sudo docker build . -t rest-api:local
+sudo docker save rest-api:local > rest-api.tar
 microk8s ctr images import rest-api.tar
 
 microk8s kubectl delete deploy rest &> /dev/null

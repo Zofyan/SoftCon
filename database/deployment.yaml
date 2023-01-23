@@ -15,16 +15,28 @@ spec:
       labels:
         app: my-postgres
     spec:
+      volumes:
+        - name: database-pv
+          persistentVolumeClaim:
+            claimName: database-pvc
       containers:
       - image: my-postgres:local
         imagePullPolicy: Never
         name: database
         ports:
         - containerPort: 5432
+        volumeMounts:
+        - mountPath: "/var/lib/postgresql/data/pgdata"
+          name: database-pv
         resources: {}
         env:
         - name: POSTGRES_PASSWORD
-          value: "testing"
+          valueFrom: 
+            secretKeyRef: 
+              name: postgres-secret 
+              key: POSTGRES_PASSWORD
+        - name: PGDATA
+          value: "/var/lib/postgresql/data/pgdata"
       dnsPolicy: ClusterFirst
       restartPolicy: Always
 status: {}

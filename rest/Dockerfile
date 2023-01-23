@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM alpine
 RUN apk update
 RUN apk add py-pip
 RUN apk add musl-dev libpq-dev gcc

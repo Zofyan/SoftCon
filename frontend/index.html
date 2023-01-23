@@ -28,7 +28,7 @@
 <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
 <script>
 function load_messages(){
-    $.getJSON('http://localhost:1234/get_messages', 
+    $.getJSON('http://10.1.177.188:1234/get_messages', 
         function (data) {
         var rows = '';
         $.each(data, function (key, value) {
@@ -44,7 +44,7 @@ function load_messages(){
 }
 
 function load_threads(){
-    $.getJSON('http://localhost:1234/get_threads', 
+    $.getJSON('http://10.1.177.188:1234/get_threads', 
         function (data) {
         var threads = '';
         $.each(data, function (key, value) {
@@ -62,9 +62,10 @@ function load_threads(){
 
 function new_message(){
     $.ajax({
-        url: 'http://localhost:1234/new_message',
+        url: 'http://10.1.177.188:1234/new_message',
         type: 'post',
         data: "content=" + $('#content').val(),
+        crossDomain: true,
         success: function(){
             load_messages();
         }
@@ -73,9 +74,10 @@ function new_message(){
 
 function new_thread(){
     $.ajax({
-        url: 'http://localhost:1234/new_thread',
+        url: 'http://10.1.177.188:1234/new_thread',
         type: 'post',
         data: "name=" + $('#new_thread').val(),
+        crossDomain: true,
         success: function(){
             load_threads();
 

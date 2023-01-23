@@ -24,7 +24,10 @@ spec:
         resources: {}
         env:
         - name: POSTGRES_PASSWORD
-          value: "testing"
+          valueFrom: 
+            secretKeyRef: 
+              name: postgres-secret 
+              key: POSTGRES_PASSWORD
       dnsPolicy: ClusterFirst
       restartPolicy: Always
 status: {}
