@@ -3,8 +3,8 @@ kind: Deployment
 metadata:
   creationTimestamp: null
   labels:
-    run: database
-  name: database
+    run: my-postgres
+  name: my-postgres
 spec:
   replicas: 1
   selector:
@@ -22,7 +22,7 @@ spec:
       containers:
       - image: my-postgres:local
         imagePullPolicy: Never
-        name: database
+        name: my-postgres
         ports:
         - containerPort: 5432
         volumeMounts:
@@ -35,6 +35,16 @@ spec:
             secretKeyRef: 
               name: postgres-secret 
               key: POSTGRES_PASSWORD
+        - name: POSTGRES_USER
+          valueFrom: 
+            secretKeyRef: 
+              name: postgres-secret 
+              key: POSTGRES_USER
+        - name: POSTGRES_DB
+          valueFrom: 
+            configMapKeyRef: 
+              name: postgres-cm 
+              key: POSTGRES_DB
         - name: PGDATA
           value: "/var/lib/postgresql/data/pgdata"
       dnsPolicy: ClusterFirst

@@ -8,12 +8,11 @@ import psycopg2 as psycopg
 
 load_dotenv()
 
-conn = psycopg.connect("dbname={} user={} password={} host={} port={}".format(
-    os.getenv('DB_DATABASE'),
-     os.getenv('DB_USERNAME'),
-      os.getenv('DB_PASSWORD'),
-       os.getenv('DB_HOST'),
-        os.getenv('DB_PORT')
+conn = psycopg.connect("dbname={} user={} password={} host={}".format(
+    os.getenv('POSTGRES_DB'),
+     os.getenv('POSTGRES_USER'),
+      os.getenv('POSTGRES_PASSWORD'),
+       os.getenv('POSTGRES_HOST')
         )
 )
 cursor = conn.cursor()
@@ -95,4 +94,4 @@ def post_new_thread_msg():
 
 
 if __name__ == '__main__':
-    api.run(host='0.0.0.0', port=1234)
+    api.run(host='0.0.0.0', port=80)

@@ -6,15 +6,16 @@ microk8s enable metallb
 microk8s enable ingress 
 
 sudo docker build . -t frontendapp:local
-docker save frontendapp:local > frontendapp.tar
+docker save frontendapp:local > /tmp/frontendapp.tar
 
-microk8s ctr images import frontendapp.tar 
+microk8s ctr images import /tmp/frontendapp.tar 
 
-microk8s kubectl delete deploy frontendapp &> /dev/null
+microk8s kubectl delete ingress frontendapp-ingress
+microk8s kubectl delete deploy frontendapp
 sleep 2;
 
 microk8s kubectl create -f frontendapp_deployment.yaml
-microk8s kubectl delete svc frontendapp-lb &> /dev/null
+microk8s kubectl delete svc frontendapp-lb
 sleep 2;
 
 microk8s kubectl apply -f frontendapp_service_lb.yaml
@@ -23,7 +24,7 @@ microk8s kubectl apply -f frontendapp_service_lb.yaml
 microk8s kubectl apply -f frontendapp_ingress.yaml
 
 microk8s kubectl get svc frontendapp-lb   
-microk8s kubectl describe ingress frontendapp-ingress  
+microk8s kubectl describe ingress frontendapp-ingress
 
 microk8s kubectl autoscale deployment frontendapp --cpu-percent=50 --min=1 --max=10
 
