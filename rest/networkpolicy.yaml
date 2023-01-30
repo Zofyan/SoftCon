@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: rest-network-policy
+  namespace: default
+spec:
+  podSelector:
+    matchLabels:
+      app: rest-api
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    - from:
+        - ipBlock:
+            cidr: 0.0.0.0/0
+      ports:
+        - port: 8090
+  egress:
+    - to:
+        - ipBlock:
+            cidr: 0.0.0.0/0

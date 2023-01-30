@@ -10,6 +10,9 @@ docker save frontendapp:local > /tmp/frontendapp.tar
 
 microk8s ctr images import /tmp/frontendapp.tar 
 
+microk8s kubectl delete networkpolicy frontend-network-policy
+microk8s kubectl create -f networkpolicy.yaml
+
 microk8s kubectl delete ingress frontendapp-ingress
 microk8s kubectl delete deploy frontendapp
 sleep 2;
