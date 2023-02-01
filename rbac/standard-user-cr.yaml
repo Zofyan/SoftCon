@@ -1,0 +1,10 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  # "namespace" omitted since ClusterRoles are not namespaced
+  # a read-only role for a standard user without any special privilege in the entire cluster
+  name: standard-user-cr
+rules:
+- apiGroups: [""]
+  resources: ["endpoints", "events", "nodes", "namespaces", "persistentvolumes", "services"]
+  verbs: ["get", "watch", "list"]
