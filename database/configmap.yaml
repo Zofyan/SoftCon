@@ -3,5 +3,4 @@ kind: ConfigMap
 metadata: 
   name: postgres-cm
 data:
-  POSTGRES_HOST: 10.152.183.250
   POSTGRES_DB:   postgres

@@ -9,14 +9,10 @@ spec:
       app: rest-api
   policyTypes:
     - Ingress
-    - Egress
   ingress:
+    - ports:
+        - port: 80
     - from:
-        - ipBlock:
-            cidr: 0.0.0.0/0
-      ports:
-        - port: 8090
-  egress:
-    - to:
-        - ipBlock:
-            cidr: 0.0.0.0/0
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/name: "ingress-nginx"

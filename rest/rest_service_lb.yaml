@@ -6,7 +6,6 @@ spec:
   selector:
     app: rest-api    
   ports:
-  - port: 9090
-    targetPort: 80               
-    nodePort: 31100
+  - port: 443
+    targetPort: 80
   type: LoadBalancer

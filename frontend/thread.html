@@ -18,7 +18,7 @@ thread_name = ""
 
 function get_thread_msgs(){
     $.ajax({
-        url: 'http://app.best-forum.com:9090/get_thread_msgs',
+        url: 'https://app.best-forum.com/get_thread_msgs',
         type: 'get',
         data: { 
             name: thread_name, 
@@ -40,7 +40,7 @@ function get_thread_msgs(){
 
 function new_thread_msg(){
     $.ajax({
-        url: 'http://app.best-forum.com:9090/new_thread_msg',
+        url: 'https://app.best-forum.com/new_thread_msg',
         type: 'post',
         data: {"name" : thread_name, "msg" : $('#new_thread_msg').val()},
         success: function(){

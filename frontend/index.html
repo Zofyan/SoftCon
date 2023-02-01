@@ -28,7 +28,7 @@
 <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
 <script>
 function load_messages(){
-    $.getJSON('http://app.best-forum.com:9090/get_messages', 
+    $.getJSON('https://app.best-forum.com/get_messages', 
         function (data) {
         var rows = '';
         $.each(data, function (key, value) {
@@ -44,7 +44,7 @@ function load_messages(){
 }
 
 function load_threads(){
-    $.getJSON('http://app.best-forum.com:9090/get_threads', 
+    $.getJSON('https://app.best-forum.com/get_threads', 
         function (data) {
         var threads = '';
         $.each(data, function (key, value) {
@@ -62,7 +62,7 @@ function load_threads(){
 
 function new_message(){
     $.ajax({
-        url: 'http://app.best-forum.com:9090/new_message',
+        url: 'https://app.best-forum.com/new_message',
         type: 'post',
         data: "content=" + $('#content').val(),
         crossDomain: true,
@@ -74,7 +74,7 @@ function new_message(){
 
 function new_thread(){
     $.ajax({
-        url: 'http://app.best-forum.com:9090/new_thread',
+        url: 'https://app.best-forum.com/new_thread',
         type: 'post',
         data: "name=" + $('#new_thread').val(),
         crossDomain: true,

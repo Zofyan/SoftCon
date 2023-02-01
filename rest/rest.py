@@ -12,7 +12,7 @@ conn = psycopg.connect("dbname={} user={} password={} host={}".format(
     os.getenv('POSTGRES_DB'),
      os.getenv('POSTGRES_USER'),
       os.getenv('POSTGRES_PASSWORD'),
-       os.getenv('POSTGRES_HOST')
+       'my-postgres'
         )
 )
 cursor = conn.cursor()

@@ -40,11 +40,6 @@ spec:
             configMapKeyRef: 
               name: postgres-cm 
               key: POSTGRES_DB
-        - name: POSTGRES_HOST
-          valueFrom: 
-            configMapKeyRef: 
-              name: postgres-cm 
-              key: POSTGRES_HOST
       dnsPolicy: ClusterFirst
       restartPolicy: Always
 status: {}
