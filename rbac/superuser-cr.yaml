@@ -6,5 +6,5 @@ metadata:
   name: superuser-cr
 rules:
 - apiGroups: [""]
-  resources: ["*"]  # TODO wildcard is dangerous. And not sure if this superuser role is useful
+  resources: ["*"] 
   verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]

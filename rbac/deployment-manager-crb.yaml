@@ -4,7 +4,7 @@ metadata:
   name: deployment-manager-crb
 subjects:
 - kind: User
-  name: deploymentmanager1 # Name is case sensitive
+  name: deploymentmanager1 
   apiGroup: rbac.authorization.k8s.io
 roleRef:
   kind: ClusterRole

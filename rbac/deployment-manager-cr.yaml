@@ -5,6 +5,6 @@ metadata:
   # a role for users who manage deployments in the entire cluster
   name: deployment-manager-cr
 rules:
-- apiGroups: ["", "extensions", "apps", "autoscaling"] # check if "" doesnt already mean every apigroup is allowed
+- apiGroups: ["", "extensions", "apps"]
   resources: ["deployments", "replicasets", "pods"]
   verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]

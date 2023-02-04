@@ -4,7 +4,7 @@ metadata:
   name: superuser-crb
 subjects:
 - kind: User
-  name: superuser1 # Name is case sensitive
+  name: superuser1 
   apiGroup: rbac.authorization.k8s.io
 roleRef:
   kind: ClusterRole

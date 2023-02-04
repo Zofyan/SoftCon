@@ -10,3 +10,5 @@ cd ../rest
 sudo sh init.sh
 cd ../frontend
 sudo sh init_frontendapp.sh
+cd ../rbac
+sudo sh init_rbac.sh
