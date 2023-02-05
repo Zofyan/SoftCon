@@ -14,7 +14,7 @@
 
 if [ "$1" = "no_microk8s" ]; then
 	kubectl delete all --all
-	kubectl delete np database-network-policy
+	kubectl delete networkpolicy database-network-policy
 	kubectl delete networkpolicy database-network-policy
 	kubectl delete networkpolicy frontend-network-policy
 	kubectl delete networkpolicy rest-network-policy
