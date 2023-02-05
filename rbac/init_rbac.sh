@@ -1,3 +1,4 @@
+#!/bin/bash
 # make sure that your hostname does not contain  capital 
 # letters or underscores if node is not ready when
 # RBAC is enabled (see https://microk8s.io/docs/troubleshooting, common issues)

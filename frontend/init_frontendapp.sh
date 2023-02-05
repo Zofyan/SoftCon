@@ -1,3 +1,4 @@
+#!/bin/bash
 microk8s enable metallb
 
 microk8s enable ingress 

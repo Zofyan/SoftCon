@@ -1,3 +1,4 @@
+#!/bin/bash
 sudo docker build . -t my-postgres:local
 sudo docker save my-postgres:local > /tmp/my-postgres.tar
 microk8s ctr images import /tmp/my-postgres.tar

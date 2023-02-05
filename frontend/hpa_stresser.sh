@@ -1,3 +1,4 @@
+#!/bin/bash
 # Stress program for testing the horizontal pod scaling, by creating background tasks 
 # which send wget requests to the frontendapp services 
 
