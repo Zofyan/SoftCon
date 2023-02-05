@@ -14,6 +14,7 @@
 
 if [ "$1" = "no_microk8s" ]; then
 	kubectl delete all --all
+	kubectl delete ingress --all
 	kubectl delete networkpolicy database-network-policy
 	kubectl delete networkpolicy database-network-policy
 	kubectl delete networkpolicy frontend-network-policy
@@ -33,6 +34,7 @@ if [ "$1" = "no_microk8s" ]; then
 	kubectl delete clusterrolebinding standard-user-crb
 else
 	microk8s kubectl delete all --all
+	microk8s kubectl delete ingress --all
 	microk8s kubectl delete np database-network-policy
 	microk8s kubectl delete networkpolicy database-network-policy
 	microk8s kubectl delete networkpolicy frontend-network-policy
@@ -51,6 +53,3 @@ else
 	microk8s kubectl delete clusterrolebinding superuser-crb
 	microk8s kubectl delete clusterrolebinding standard-user-crb
 fi
-
-
-
