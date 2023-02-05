@@ -1,3 +1,4 @@
+microk8s enable dns storage cert-manager
 microk8s kubectl apply -f ingress.yaml
 microk8s kubectl apply -f clusterissuer.yaml
 microk8s kubectl apply -f root_cert.yaml
