@@ -25,6 +25,7 @@ if [ "$1" = "no_microk8s" ]; then
 	kubectl delete secret postgres-secret
 	kubectl delete configmap postgres-cm 
 	kubectl delete pvc --all
+	kubectl delete issuer --all
 	kubectl delete pv --all
 	kubectl delete clusterrole deployment-manager-cr 
 	kubectl delete clusterrole standard-user-cr 
@@ -46,6 +47,7 @@ else
 	microk8s kubectl delete configmap postgres-cm 
 	microk8s kubectl delete pvc --all
 	microk8s kubectl delete pv --all
+	microk8s kubectl delete issuer --all
 	microk8s kubectl delete clusterrole deployment-manager-cr 
 	microk8s kubectl delete clusterrole standard-user-cr 
 	microk8s kubectl delete clusterrole superuser-cr 
