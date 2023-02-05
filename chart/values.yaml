@@ -7,6 +7,9 @@ autoscaling:
   maxReplicas: 10
   averageUtilization: 50
 
+clusterRole:
+  allCurrentVerbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+
 dbDeployment:
   replicas: 1
 
@@ -19,8 +22,18 @@ dbClusterIP:
   port : 5432
   targetPort : 5432
 
-clusterRole:
-    allCurrentVerbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+dbPV:
+  storage: 1Gi
+  accessModes: ReadWriteMany
+  hostPath: "/var/lib/data"
+
+dbPVC:
+  storage: 500Mi
+  accessModes: ReadWriteMany
+
+dbSecret:
+  POSTGRES_USER: cG9zdGdyZXM=
+  POSTGRES_PASSWORD: YWRtaW4xMjMK
 
 frontendappContainer:
   imagePullPolicy: IfNotPresent
@@ -35,6 +48,11 @@ restLoadbalancer:
   port: 443
   targetPort: 80
 
+restContainer:
+  containerPort: 80
+  imagePullPolicy: IfNotPresent
+  restartPolicy: Always 
+
 networkPolicyDb:
   ingressPort: 5432
 
@@ -44,23 +62,6 @@ networkPolicyFrontend:
 networkPolicyRest:
   port: 80
 
-dbPV:
-  storage: 1Gi
-  accessModes: ReadWriteMany
-  hostPath: "/mnt/data"
-
-dbPVC:
-  storage: 500Mi
-  accessModes: ReadWriteMany
-
-restContainer:
-  containerPort: 80
-  imagePullPolicy: IfNotPresent
-  restartPolicy: Always 
-
-dbSecret:
-  POSTGRES_USER: cG9zdGdyZXM=
-  POSTGRES_PASSWORD: YWRtaW4xMjMK
 
 
 # --- 
