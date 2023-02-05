@@ -5,7 +5,7 @@ metadata:
 spec:
   storageClassName: manual
   accessModes:
-    - ReadWriteMany
+    - {{ .Values.dbPVC.accessModes }}
   resources:
     requests:
-      storage: 500Mi
+      storage: {{ .Values.dbPVC.storage }}

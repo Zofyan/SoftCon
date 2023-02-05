@@ -8,9 +8,10 @@
 
 run_time_secs=180
 num_stressers=60
+url="https://best-forum.com/"
 
 test_fnc () {
-	while sleep 0.01; do wget http://127.0.0.1:31000/ -q -O - > /dev/null; done
+	while sleep 0.01; do wget $url -q -O - --no-check-certificate > /dev/null; done
 }
 
 arrVar=()

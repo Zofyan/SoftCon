@@ -2,7 +2,68 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-replicaCount: 1
+autoscaling:
+  minReplicas: 1
+  maxReplicas: 10
+  averageUtilization: 50
+
+dbDeployment:
+  replicas: 1
+
+dbContainer:
+  containerPort: 5432
+  containerMountpath: "/var/lib/postgresql/data/pgdata" 
+  imagePullPolicy: IfNotPresent
+
+dbClusterIP:
+  port : 5432
+  targetPort : 5432
+
+clusterRole:
+    allCurrentVerbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+
+frontendappContainer:
+  imagePullPolicy: IfNotPresent
+  containerPort: 80
+  restartPolicy: Always 
+
+frontendappLoadBalancer:
+  port: 443
+  targetPort: 80
+
+restLoadbalancer:
+  port: 443
+  targetPort: 80
+
+networkPolicyDb:
+  ingressPort: 5432
+
+networkPolicyFrontend:
+  port: 80
+
+networkPolicyRest:
+  port: 80
+
+dbPV:
+  storage: 1Gi
+  accessModes: ReadWriteMany
+  hostPath: "/mnt/data"
+
+dbPVC:
+  storage: 500Mi
+  accessModes: ReadWriteMany
+
+restContainer:
+  containerPort: 80
+  imagePullPolicy: IfNotPresent
+  restartPolicy: Always 
+
+dbSecret:
+  POSTGRES_USER: cG9zdGdyZXM=
+  POSTGRES_PASSWORD: YWRtaW4xMjMK
+
+
+# --- 
 
 image:
   repository: nginx
@@ -68,12 +129,6 @@ resources: {}
   #   cpu: 100m
   #   memory: 128Mi
 
-autoscaling:
-  enabled: false
-  minReplicas: 1
-  maxReplicas: 100
-  targetCPUUtilizationPercentage: 80
-  # targetMemoryUtilizationPercentage: 80
 
 nodeSelector: {}
 

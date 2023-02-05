@@ -10,9 +10,9 @@ spec:
   - IPv4
   ipFamilyPolicy: SingleStack
   ports:
-  - port: 5432
+  - port: {{ .Values.dbClusterIP.port }}
     protocol: TCP
-    targetPort: 5432
+    targetPort: {{ .Values.dbClusterIP.targetPort }}
   selector:
     app: my-postgres
   sessionAffinity: None

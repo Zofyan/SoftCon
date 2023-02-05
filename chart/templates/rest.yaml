@@ -15,10 +15,10 @@ spec:
     spec:
       containers:
       - image: iaotle/rest-api:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: {{ .Values.restContainer.imagePullPolicy }}
         name: rest
         ports:
-        - containerPort: 80
+        - containerPort: {{ .Values.restContainer.containerPort }}
         resources:
           limits:
             cpu : 500m
@@ -41,5 +41,5 @@ spec:
               name: postgres-cm 
               key: POSTGRES_DB
       dnsPolicy: ClusterFirst
-      restartPolicy: Always
+      restartPolicy: {{ .Values.restContainer.restartPolicy }}
 status: {}

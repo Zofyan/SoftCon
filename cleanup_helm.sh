@@ -3,6 +3,17 @@
 # will cleanup some things before helm install
 # will delete everything!
 
+# if the pv / pvc gets stuck on being deleted, then do 
+# kubectl edit pv x (where x is either the PV or PVC)
+# then find the lines 
+
+# finalizers:
+#   -  kubernetes.io/pv-protection 
+
+# and delete them
+
+
+
 microk8s kubectl delete all --all
 microk8s kubectl delete np database-network-policy
 microk8s kubectl delete networkpolicy database-network-policy

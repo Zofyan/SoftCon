@@ -11,7 +11,7 @@ spec:
     - Ingress
   ingress:
     - ports:
-        - port: 80
+        - port: {{ .Values.networkPolicyRest.port }}
     - from:
         - podSelector:
             matchLabels:

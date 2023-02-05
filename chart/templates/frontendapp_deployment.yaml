@@ -16,12 +16,12 @@ spec:
       containers:
       - name: frontendapp-cont
         image: iaotle/frontendapp:latest
-        imagePullPolicy: IfNotPresent      
+        imagePullPolicy: {{ .Values.frontendappContainer.imagePullPolicy }}      
         ports:
-        - containerPort: 80
+        - containerPort: {{ .Values.frontendappContainer.containerPort }}
         resources:
           limits:
             cpu : 500m
           requests: 
             cpu : 200m    
-      restartPolicy: Always 
+      restartPolicy: {{ .Values.frontendappContainer.restartPolicy }} 

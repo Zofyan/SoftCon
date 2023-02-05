@@ -6,6 +6,6 @@ spec:
   selector:
     app: rest-api    
   ports:
-  - port: 443
-    targetPort: 80
+  - port: {{ .Values.restLoadbalancer.port }}
+    targetPort: {{ .Values.restLoadbalancer.targetPort }}
   type: LoadBalancer

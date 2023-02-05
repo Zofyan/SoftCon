@@ -6,7 +6,7 @@ metadata:
     run: my-postgres
   name: my-postgres
 spec:
-  replicas: 1
+  replicas: {{ .Values.dbDeployment.replicas }}
   selector:
     matchLabels:
       app: my-postgres
@@ -21,12 +21,12 @@ spec:
             claimName: database-pvc
       containers:
       - image: iaotle/my-postgres:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: {{ .Values.dbContainer.imagePullPolicy }}
         name: my-postgres
         ports:
-        - containerPort: 5432
+        - containerPort: {{ .Values.dbContainer.containerPort }}
         volumeMounts:
-        - mountPath: "/var/lib/postgresql/data/pgdata"
+        - mountPath: {{ .Values.dbContainer.containerMountpath }}
           name: database-pv
         resources: {}
         env:
@@ -46,7 +46,7 @@ spec:
               name: postgres-cm 
               key: POSTGRES_DB
         - name: PGDATA
-          value: "/var/lib/postgresql/data/pgdata"
+          value: {{ .Values.dbContainer.containerMountpath }}
       dnsPolicy: ClusterFirst
       restartPolicy: Always
 status: {}

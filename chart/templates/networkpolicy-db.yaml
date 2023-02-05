@@ -17,7 +17,7 @@ spec:
               app: rest-api
       ports:
         - protocol: TCP
-          port: 5432
+          port: {{ .Values.networkPolicyDb.ingressPort }}
   egress:
     - to:
         - podSelector:

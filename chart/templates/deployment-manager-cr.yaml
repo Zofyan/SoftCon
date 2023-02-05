@@ -7,4 +7,4 @@ metadata:
 rules:
 - apiGroups: ["", "extensions", "apps"]
   resources: ["deployments", "replicasets", "pods"]
-  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+  verbs: {{ .Values.clusterRole.allCurrentVerbs }}
