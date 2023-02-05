@@ -1,0 +1,10 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  # "namespace" omitted since ClusterRoles are not namespaced
+  # a role for super users which can perform the stated verbs on all the resources in the entire cluster 
+  name: superuser-cr
+rules:
+- apiGroups: [""]
+  resources: ["*"] 
+  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]

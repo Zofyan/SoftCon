@@ -20,7 +20,7 @@ spec:
           persistentVolumeClaim:
             claimName: database-pvc
       containers:
-      - image: my-postgres:local
+      - image: iaotle/my-postgres:latest
         imagePullPolicy: IfNotPresent
         name: my-postgres
         ports:

@@ -1,34 +1,29 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  creationTimestamp: null
+  name: rest
   labels:
-    run: my-postgres
-  name: my-postgres
+    run: rest
 spec:
-  replicas: 1
   selector:
     matchLabels:
-      app: my-postgres
+      app: rest-api
   template:
     metadata:
       labels:
-        app: my-postgres
+        app: rest-api
     spec:
-      volumes:
-        - name: database-pv
-          persistentVolumeClaim:
-            claimName: database-pvc
       containers:
-      - image: my-postgres:local
+      - image: iaotle/rest-api:latest
         imagePullPolicy: IfNotPresent
-        name: my-postgres
+        name: rest
         ports:
-        - containerPort: 5432
-        volumeMounts:
-        - mountPath: "/var/lib/postgresql/data/pgdata"
-          name: database-pv
-        resources: {}
+        - containerPort: 80
+        resources:
+          limits:
+            cpu : 500m
+          requests: 
+            cpu : 200m 
         env:
         - name: POSTGRES_PASSWORD
           valueFrom: 
@@ -45,8 +40,6 @@ spec:
             configMapKeyRef: 
               name: postgres-cm 
               key: POSTGRES_DB
-        - name: PGDATA
-          value: "/var/lib/postgresql/data/pgdata"
       dnsPolicy: ClusterFirst
       restartPolicy: Always
 status: {}
