@@ -18,6 +18,9 @@ if [ "$1" = "no_microk8s" ]; then
 	kubectl delete networkpolicy database-network-policy
 	kubectl delete networkpolicy frontend-network-policy
 	kubectl delete networkpolicy rest-network-policy
+	kubectl delete clusterissuer cluster-issuer
+	kubectl delete issuer issuer
+	kubectl delete certificate my-selfsigned-ca
 	kubectl delete secret postgres-secret
 	kubectl delete configmap postgres-cm 
 	kubectl delete pvc --all
@@ -34,6 +37,9 @@ else
 	microk8s kubectl delete networkpolicy database-network-policy
 	microk8s kubectl delete networkpolicy frontend-network-policy
 	microk8s kubectl delete networkpolicy rest-network-policy
+	microk8s kubectl delete clusterissuer cluster-issuer
+	microk8s kubectl delete issuer issuer
+	microk8s kubectl delete certificate my-selfsigned-ca
 	microk8s kubectl delete secret postgres-secret
 	microk8s kubectl delete configmap postgres-cm 
 	microk8s kubectl delete pvc --all
