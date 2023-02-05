@@ -9,6 +9,11 @@ metadata:
     kubernetes.io/ingress.class: public
     cert-manager.io/issuer: "my-ca-issuer"   
 spec:
+  defaultBackend:
+    service:
+      name: web
+      port:
+        number: 443
   tls:
     - hosts:
       - best-forum.com  
